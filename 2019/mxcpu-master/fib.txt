@@ -1,0 +1,59 @@
+# Fib program that preloads n=4 into 0x0F
+00:D1 04    # set acc to 4
+02:D2 0F    # load acc val of 4 into 0x0F
+04:D1 00    # set acc to 0
+06:D2 00    # load acc val of 0 into 0x00
+08:D1 01    # set acc to 1
+0A:D2 01    # load acc val of 1 into 0x01
+0C:C4       # clear the counter
+0D:C5       # put counter in acc
+0E:B3 00 23 # check to see if count == 0
+11:B3 01 23 # check to see if count == 1
+14:D0 00    # copy 0x00 into acc
+16:C0 01    # add 0x00+0x01
+18:D2 02    # save results to 0x02
+1A:D0 01    # get 0x01 value
+1C:D2 00    # store 0x01 value in 0x00
+1E:D0 02    # get sum from 0x02
+20:D2 01    # put sum in 0x01
+22:C5       # copy counter to acc
+23:B2 0F 29 # if count == value in 0x0F, jump to 0x29
+26:C2       # increment counter
+27:B1 0D    # jump to top of loop
+29:C5       # put counter in acc
+2A:B3 00 31 # if count is 0, jump to end (0x31)
+2D:D0 01    # get val from 0x01
+2F:D2 00    # save val to 0x00
+31:00       # halt
+
+# Above fib program without address and comments
+D1 07 D2 0F D1 00 D2 00 D1 01 D2 01 C4 C5 B3 00 23 B3 01 23 D0 00 C0 01 D2 02 D0 01 D2 00 D0 02 D2 01 C5 B2 0F 29 C2 B1 0D C5 B3 00 31 D0 01 D2 00 00
+
+# Fib program without preloaded n value
+00:D1 00    # set acc to 0
+02:D2 00    # load acc val of 0 into 0x00
+04:D1 01    # set acc to 1
+06:D2 01    # load acc val of 1 into 0x01
+08:C4       # clear the counter
+09:C5       # put counter in acc
+0A:B3 00 1F # check to see if count == 0
+0D:B3 01 1F # check to see if count == 1
+10:D0 00    # copy 0x00 into acc
+12:C0 01    # add 0x00+0x01
+14:D2 02    # save results to 0x02
+16:D0 01    # get 0x01 value
+18:D2 00    # store 0x01 value in 0x00
+1A:D0 02    # get sum from 0x02
+1C:D2 01    # put sum in 0x01
+1E:C5       # copy counter to acc
+1F:B2 0F 25 # if count == value in 0x0F, jump to 0x29
+22:C2       # increment counter
+23:B1 09    # jump to top of loop
+25:C5       # put counter in acc
+26:B3 00 2D # if count is 0, jump to end (0x31)
+29:D0 01    # get val from 0x01
+2B:D2 00    # save val to 0x00
+2D:00       # halt
+
+# Above fib program without address and comments
+D1 00 D2 00 D1 01 D2 01 C4 C5 B3 00 1F B3 01 1F D0 00 C0 01 D2 02 D0 01 D2 00 D0 02 D2 01 C5 B2 0F 25 C2 B1 09 C5 B3 00 2D D0 01 D2 00 00
